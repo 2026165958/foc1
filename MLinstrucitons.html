@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Language Demo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #eef7ff 0%, #f5f0ff 100%);
+            color: #1f2937;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .page-shell {
+            width: min(1100px, 100%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(96, 165, 250, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 18px 50px rgba(15, 23, 42, 0.1);
+            padding: 32px 24px 24px;
+        }
+
+        h3 {
+            text-align: center;
+            color: #1d4ed8;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            margin: 0 0 12px;
+            font-weight: 800;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 28px;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .demo-card {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1.2fr;
+            gap: 22px;
+            align-items: center;
+            background: linear-gradient(180deg, #f8fbff, #f5f3ff);
+            border-radius: 20px;
+            padding: 22px;
+            border: 1px solid #dbeafe;
+        }
+
+        .image-panel,
+        .controls-panel,
+        .english-panel {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 8px 20px rgba(148, 163, 184, 0.12);
+        }
+
+        .image-panel, .english-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .controls-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: stretch;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            padding: 16px 18px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 10px 18px rgba(59, 130, 246, 0.18);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 22px rgba(59, 130, 246, 0.25);
+        }
+
+        .info-box {
+            margin-top: 28px;
+            background: #fefce8;
+            border: 1px solid #facc15;
+            border-radius: 18px;
+            padding: 20px 22px;
+            box-shadow: 0 8px 16px rgba(202, 138, 4, 0.08);
+        }
+
+        .info-box h4 {
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+            color: #854d0e;
+        }
+
+        .info-box p {
+            margin: 0 0 16px;
+            font-size: 1.02rem;
+            line-height: 1.8;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        pre {
+            margin: 0;
+            padding: 16px 18px;
+            background: #111827;
+            color: #d1fae5;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+
+        .nav-row {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            background: #111827;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+
+        .home-btn:hover {
+            background: #1f2937;
+        }
+
+        @media (max-width: 820px) {
+            .demo-card {
+                grid-template-columns: 1fr;
+            }
+
+            .image-panel,
+            .english-panel {
+                min-height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <h3>A Simple Interactive Machine Language</h3>
+        <p class="intro">
+            Each instruction is like a small command for the computer. Click a code below to see what it means in a beginner-friendly way.
+        </p>
+
+        <div class="demo-card">
+            <div class="image-panel">
+                <img id="MLinstrucitons" src="MLblank.png" alt="Machine language diagram">
+            </div>
+
+            <div class="controls-panel">
+                <button class="button" data-machine="ML1.png" data-english="EI1.png">156C</button>
+                <button class="button" data-machine="ML2.png" data-english="EI2.png">166D</button>
+                <button class="button" data-machine="ML3.png" data-english="EI3.png">5056</button>
+                <button class="button" data-machine="ML4.png" data-english="EI4.png">306E</button>
+                <button class="button" data-machine="ML5.png" data-english="EI5.png">C000</button>
+            </div>
+
+            <div class="english-panel">
+                <img id="Englishinstrucitons" src="EI1.png" alt="English explanation of the instruction">
+            </div>
+        </div>
+
+        <div class="info-box">
+            <h4>Beginner-friendly explanation</h4>
+            <p>
+                Machine language is basically a set of instruction codes that tell a processor what to do. In this example,
+                each number is a command. You can think of it like a recipe: each step tells the computer to move, store, or finish.
+            </p>
+            <pre><code>156C  → Load a value into memory
+166D  → Move or store the value
+5056  → Process the data
+306E  → Continue the next action
+C000  → Stop / end the program</code></pre>
+        </div>
+
+        <div class="nav-row">
+            <a class="home-btn" href="index.html">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const machine = button.dataset.machine;
+                const english = button.dataset.english;
+
+                document.getElementById('MLinstrucitons').src = machine;
+                document.getElementById('Englishinstrucitons').src = english;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary to Hexadecimal</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #eef7ff, #f5f1ff);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #1f2937;
+      padding: 30px 20px;
+    }
+
+    .card {
+      width: min(880px, 100%);
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(59, 130, 246, 0.14);
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      color: #1d4ed8;
+      font-weight: 800;
+    }
+
+    .intro {
+      max-width: 700px;
+      margin: 0 auto 22px;
+      font-size: 1.08rem;
+      line-height: 1.8;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .image-box {
+      display: flex;
+      justify-content: center;
+      margin: 18px auto 28px;
+    }
+
+    img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 16px 35px rgba(59, 130, 246, 0.15);
+    }
+
+    .converter-box {
+      background: #f8fafc;
+      border: 1px solid #dbeafe;
+      border-radius: 18px;
+      padding: 20px 18px;
+      max-width: 540px;
+      margin: 0 auto 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    input {
+      width: 100%;
+      max-width: 340px;
+      padding: 12px 14px;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      outline: none;
+      margin: 0 auto 14px;
+      display: block;
+      text-align: center;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    }
+
+    button {
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 22px rgba(59, 130, 246, 0.18);
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .result-box {
+      margin-top: 18px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #065f46;
+    }
+
+    .info {
+      margin-top: 22px;
+      text-align: left;
+      background: #fefce8;
+      border: 1px solid #facc15;
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .info h3 {
+      margin: 0 0 10px;
+      color: #854d0e;
+      font-size: 1.25rem;
+    }
+
+    .info p {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 600;
+      color: #4b5563;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px 18px;
+      background: #111827;
+      color: #d1fae5;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    .home-row {
+      margin-top: 26px;
+      text-align: center;
+    }
+
+    .home-btn {
+      display: inline-block;
+      background: #111827;
+      color: white;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <section class="card">
+    <h2>Project 1: Binary to Hexadecimal</h2>
+
+    <p class="intro">
+      Binary uses 0s and 1s, while hexadecimal uses digits from 0 to 9 and letters A to F.
+      This converter helps you change a 4-digit binary number into its hexadecimal value.
+    </p>
+
+    <div class="image-box">
+      <img src="bintohex.jpg" alt="Binary to Hexadecimal illustration">
+    </div>
+
+    <div class="converter-box">
+      <label for="inputBin">Enter a 4-digit binary number</label>
+      <input type="number" id="inputBin" placeholder="Example: 1010">
+      <button onclick="binToHex()">Submit</button>
+
+      <div class="result-box">
+        Hexadecimal Value: <span id="demo">--</span>
+      </div>
+    </div>
+
+    <div class="info">
+      <h3>Beginner-friendly explanation</h3>
+      <p>
+        Binary groups are converted by reading the digits as a number with base 2, then changing it into base 16.
+        Hexadecimal is easier for computers and programmers to read than long binary strings.
+      </p>
+      <pre><code>Example:
+1010 in binary
+= 10 in hexadecimal
+
+JavaScript idea:
+parseInt(value, 2).toString(16).toUpperCase()</code></pre>
+    </div>
+
+    <div class="home-row">
+      <a class="home-btn" href="index.html">Back to Home</a>
+    </div>
+  </section>
+
+  <script>
+    function binToHex() {
+      var x = document.getElementById("inputBin").value;
+      if (x === "") {
+        document.getElementById("demo").innerHTML = "Please enter a value";
+        return;
+      }
+
+      var hexOut = parseInt(x, 2).toString(16).toUpperCase();
+      document.getElementById("demo").innerHTML = hexOut;
+    }
+  </script>
+</body>
+</html>
